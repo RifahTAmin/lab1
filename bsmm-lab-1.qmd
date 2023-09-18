@@ -13,7 +13,7 @@ self-contained: true
 Load packages and data:
 
 ```{r load-pkg-data}
-#| message: false
+install.packages("Lahman")
 library(Lahman)
 ```
 
@@ -27,17 +27,44 @@ dplyr::glimpse(Teams)
 
 The `Teams` dataset has \_\_\_ observations and \_\_\_ variables.
 
+```{r}
+install.packages("tidyverse")
+```
+
 ### Exercise 2
 
 ...
+
+```{r}
+mets <- Teams  |>
+  dplyr::filter(teamID == "NYN")
+my_mets <- mets |>
+  dplyr::filter(yearID %in% c(2004:2012))
+my_mets |> 
+  dplyr::select(yearID,G,W,L)
+```
 
 ### Exercise 3
 
 ...
 
+```{r}
+mets_ben <- Teams |>
+  dplyr::select(yearID, teamID, G, W, L, RA, RS = R) |>
+  dplyr::filter(teamID == "NYN" & yearID %in% 2004:2012)
+mets_ben
+
+```
+
 ### Exercise 4
 
 ...
+
+```{r}
+mets_ben <- mets_ben |>
+  dplyr::mutate(WPct = W*100/G)
+mets_ben
+```
 
 ### Exercise 5
 
